@@ -25,12 +25,12 @@
         </main>
     </div> --}}
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
-            <x-side-bar></x-side-bar>
+        <div x-data="{ open: true }" class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
+            <x-side-bar class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0 "></x-side-bar>
             <!-- Page Content -->
-            <div class="flex-1 md:ml-64">
+            <div class="flex-1" :class="open ? 'md:ml-64' : ''">
                 <x-nav-bar></x-nav-bar>
-                <main class="mt-20">
+                <main class="mt-2">
                     {{ $slot }}
                 </main>
             </div>

@@ -1,6 +1,6 @@
 <x-app-layout>
     {{-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"> --}}
-        <div class="bg-white dark:bg-gray-800 overflow-hidden mx-5 shadow-sm md:rounded-lg">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden mx-3 shadow-sm md:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. In illo ducimus amet architecto nostrum commodi obcaecati officia consequatur. Accusantium voluptatum ab dolore vel minima sequi optio maxime inventore possimus quae?lor
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. In illo ducimus amet architecto nostrum commodi obcaecati officia consequatur. Accusantium voluptatum ab dolore vel minima sequi optio maxime inventore possimus quae?lor
