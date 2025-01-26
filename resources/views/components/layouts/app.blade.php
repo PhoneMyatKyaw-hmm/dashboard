@@ -14,23 +14,13 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    {{-- <div class="flex gap-8 bg-white dark:bg-gray-900">
-        <x-side-bar class="min-w-fit flex-grow-0 flex-shrink-0 hidden md:block"/>
-        <main class="mt-4 px-4">
-            <div class="block sm:absolute top-5 right-8 order-1">
-                <x-dark-mode-toggle size="4" />
-            </div>
-            {{ $slot }}
-            <x-footer />
-        </main>
-    </div> --}}
     <body class="font-sans antialiased">
-        <div x-data="{ open: true }" class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
-            <x-side-bar class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full md:translate-x-0 "></x-side-bar>
+        <div x-data="{ open: true }" class="min-h-screen bg-slate-100 dark:bg-gray-900 flex">
+            <x-side-bar ::class="!open ? 'w-[4.5rem]' : 'w-64'" class="fixed top-0 left-0 z-40 h-screen transition-transform -translate-x-full md:translate-x-0 "></x-side-bar>
+            
             <!-- Page Content -->
-            <div class="flex-1" :class="open ? 'md:ml-64' : ''">
-                <x-nav-bar></x-nav-bar>
-                <main class="mt-2">
+            <div class="flex-1" :class="open ? 'md:ml-64' : 'ml-[4.5rem]'">
+                <main class="my-2 mr-4">
                     {{ $slot }}
                 </main>
             </div>
