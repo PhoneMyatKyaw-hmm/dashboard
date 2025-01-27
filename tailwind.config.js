@@ -16,11 +16,11 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'primary' : '#1e8eff',
-                'dprimary' : '#00182f',
+                'primary': '#1e8eff',
+                'dark': '#00182f',
+                'dark-secondary': '#092a48'
             }
         },
-
     },
 
     plugins: [forms, require('flowbite/plugin')],
