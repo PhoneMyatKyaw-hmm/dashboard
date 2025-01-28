@@ -22,17 +22,84 @@
                     <div class="grid grid-cols-2 gap-6 p-6">
 
                         <div class="col-start-1">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                            <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                            <label for="name" class="{{ $errors->get('name') ? 'text-red-700' : 'text-gray-900' }} block mb-2 text-sm font-medium">Name</label>
+                            <input type="name" id="name"
+                                    class="
+                                    {{-- {{ true ? 'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500' : 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-primary focus:border-primary' }} --}}
+                                    border text-sm rounded-lg block w-full p-2.5 focus:ring-blue-500 focus:border-blue-500" required />
+                            @if ($errors->get('name'))
+                                <p class="mt-2 text-sm  text-red-600 ">
+                                    <span>{{ $errors->first('name') }}</span>
+                                </p>
+                            @endif
                         </div>
+                        {{-- <div>
+                            <label for="username-error" class="block mb-2 text-sm font-medium text-red-700 dark:text-red-500">Your name</label>
+                            <input type="text" id="username-error" class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500" placeholder="Bonnie Green">
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> Username already taken!</p>
+                        </div> --}}
+
                         <div class="col-start-1">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <input type="email" id="email"
+                                    class="
+                                    {{ true ? 'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500' : 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-primary focus:border-primary' }}
+                                    text-sm rounded-lg block w-full p-2.5" placeholder="name@flowbite.com" required />
                         </div>
                         <div class="">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                             <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                         </div>
+
+                        <div class="col-start-1">
+                            <div class="space-y-4">
+                              <h3 class="text-base font-medium text-gray-900 mb-4">Role</h3>
+
+                              <div class="space-y-4">
+                                <!-- Administrator Option -->
+                                <label class="flex items-start">
+                                  <div class="flex items-center h-5">
+                                    <input type="radio" name="role" checked class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                  </div>
+                                  <div class="ml-3">
+                                    <span class="block text-sm font-medium text-gray-900">Administrator</span>
+                                    <span class="block text-sm text-gray-500">Administrator users can perform any action.</span>
+                                  </div>
+                                </label>
+
+                                <!-- Editor Option -->
+                                <label class="flex items-start">
+                                  <div class="flex items-center h-5">
+                                    <input type="radio" name="role" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                  </div>
+                                  <div class="ml-3">
+                                    <span class="block text-sm font-medium text-gray-900">Editor</span>
+                                    <span class="block text-sm text-gray-500">Editor users have the ability to read, create, and update.</span>
+                                  </div>
+                                </label>
+
+                                <!-- Viewer Option -->
+                                <label class="flex items-start">
+                                  <div class="flex items-center h-5">
+                                    <input type="radio" name="role" class="h-4 w-4 text-primary border-gray-300 focus:ring-primary">
+                                  </div>
+                                  <div class="ml-3">
+                                    <span class="block text-sm font-medium text-gray-900">Viewer</span>
+                                    <span class="block text-sm text-gray-500">Viewer users only have the ability to read. Create, and update are restricted.</span>
+                                  </div>
+                                </label>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer" checked>
+                                <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Is Active</span>
+                            </label>
+                        </div>
+
                         {{-- <div class="flex items-start mb-5">
                             <div class="flex items-center h-5">
                                 <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
@@ -41,21 +108,12 @@
                         </div> --}}
                     </div>
                 </div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </form>
+                <div class="flex mt-6 justify-end gap-3">
+                    <button type="submit" class="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                    <button type="submit" class="text-white bg-dark hover:bg-dark-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cancel</button>
+                </div>
 
-            {{-- <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Read more
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                    </svg>
-                </a>
-            </div> --}}
+            </form>
 
         </div>
 
