@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
+use App\Services\UserService;
+use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -11,7 +16,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('access-users');
+
+        $users = User::all();
+
+        return view('admin.users.index')->with('users', $users);
+
     }
 
     /**
@@ -19,46 +29,52 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        Gate::authorize('create-users');
+
+        $roles = Role::all();
+
+        return view('admin.users.create')->with('roles', $roles);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request, UserService $userService)
     {
-        //
-    }
+        $userService->create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect(route('users.index'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        Gate::authorize('update-users');
+
+        $roles = Role::all();
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user, UserService $userService)
     {
-        //
+        $userService->update($user, $request->validated());
+
+        return redirect(route('users.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user, UserService $userService)
     {
-        //
+        Gate::authorize('delete-users');
+
+        $userService->delete($user);
     }
 }
