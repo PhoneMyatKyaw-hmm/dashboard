@@ -43,6 +43,8 @@ class UserController extends Controller
     {
         $userService->create($request->validated());
 
+        flash()->success(__('flash.user.createSuccess'));
+
         return redirect(route('users.index'));
     }
 
@@ -65,6 +67,8 @@ class UserController extends Controller
     {
         $userService->update($user, $request->validated());
 
+        flash()->success(__('flash.user.updateSuccess'));
+
         return redirect(route('users.index'));
     }
 
@@ -76,5 +80,7 @@ class UserController extends Controller
         Gate::authorize('delete-users');
 
         $userService->delete($user);
+
+        flash()->success(__('flash.user.deleteSuccess'));
     }
 }
