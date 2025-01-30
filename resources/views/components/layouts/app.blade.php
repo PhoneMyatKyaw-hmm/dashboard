@@ -28,6 +28,13 @@
             </main>
         </div>
 
+        <div class="bg-white m-4 h-[calc(100vh-2rem)] overflow-x-hidden overflow-y-auto shadow-sm md:rounded-3xl">
+            <main class="grow">
+                {{ $slot }}
+            </main>
+        </div>
+
+    </div>
     </div>
 </body>
 

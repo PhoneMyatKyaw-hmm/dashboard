@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
     return redirect('/login');
@@ -15,6 +15,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/tables', function () {
+        return view('table');
+    });
 
     // Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::resource('users', UserController::class)->except('show');

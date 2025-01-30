@@ -5,3 +5,29 @@
 [x-cloak] {
     display: none !important;
 }
+
+ /* Override Select2 styles with custom Tailwind styles */
+.select2-custom {
+    background-color: #f9fafb !important;
+    border: 1px solid #d1d5db !important;
+    color: #111827 !important;
+    font-size: 0.875rem !important;
+}
+
+.select2-container .select2-selection--single
+ {
+    height: 2.5rem !important;
+    @apply !flex !items-center !rounded-lg;
+}
+
+.select2-container .select2-selection--single:focus  {
+    @apply focus:ring-primary focus:border-primary
+}
+
+.select2-container--default .select2-selection__arrow {
+    @apply mt-1.5;
+}
+
+.select2-container .select2-search__field {
+    height: 1.5rem !important;
+}
