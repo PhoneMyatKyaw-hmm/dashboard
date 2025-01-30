@@ -31,3 +31,8 @@
 .select2-container .select2-search__field {
     height: 1.5rem !important;
 }
+
+/* Override file styles */
+.filepond--credits {
+    @apply !hidden;
+}
