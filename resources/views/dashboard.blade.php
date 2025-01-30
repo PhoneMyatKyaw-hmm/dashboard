@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <div class="bg-white dark:bg-gray-800 h-[97vh] overflow-auto shadow-sm md:rounded-3xl">
+    <div class="bg-white dark:bg-gray-800 h-[96vh] overflow-auto shadow-sm md:rounded-3xl">
 
         <div class="sticky flex top-0 h-[3rem] border-b bg-white">
             <x-breadcrumb>

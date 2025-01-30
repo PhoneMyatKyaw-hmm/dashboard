@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Services\TempMediaService;
-use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
@@ -25,4 +26,5 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::resource('users', UserController::class)->except('show');
+    Route::resource('roles', RoleController::class)->except('show');
 });
