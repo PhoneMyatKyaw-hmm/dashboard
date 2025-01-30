@@ -4,6 +4,9 @@
 <label for="{{ $attributes->get('id') }}"
     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white {{ $hasError ? 'text-red-700' : '' }}">
     {{ $label }}
+    @if ($attributes->get('required'))
+        <span class="text-red-500">*</span>
+    @endif
 </label>
 
 <!-- Input -->

@@ -1,6 +1,4 @@
 <x-layouts.app>
-    <div class="bg-white dark:bg-gray-800 h-[97vh] overflow-auto shadow-sm md:rounded-3xl">
-
         <div class="sticky flex top-0 h-[3rem] border-b bg-white">
             <x-breadcrumb>
                 <x-breadcrumb.main :href="route('roles.index')" :text="__('role.title')">
@@ -17,9 +15,9 @@
             </x-breadcrumb>
         </div>
 
-        <div class="mx-auto w-[90%] m-10 text-gray-900 dark:text-gray-100 ">
+        <x-layouts.content>
             <div class="font-bold text-2xl">
-                {{ __('role.create') }}
+                {{ __('role.edit') }}
             </div>
             <form method="POST" action="{{ route('roles.update', [$role->id]) }}">
                 @csrf
@@ -28,16 +26,14 @@
                     <div class="grid grid-cols-2 gap-6 p-6">
 
                         <div class="col-start-1">
-                            <x-input.label isRequired='true' for="name" :value="__('role.name')" :hasError="$errors->get('name')" />
                             <x-input id="name" name="name" type="text" required :value="old('name', $role->name)"
-                                :hasError="$errors->get('name')" />
+                                :hasError="$errors->get('name')" :label="__('role.name')" />
                             <x-input.error :message="$errors->first('name')" />
                         </div>
 
                         <div>
-                            <x-input.label for="description" :value="__('role.description')" :hasError="$errors->get('description')" />
-                            <x-input id="description" name="description" type="text" :value="old('description', $role->description)"
-                                :hasError="$errors->get('description')" />
+                            <x-input id="description" name="description" type="text"  :value="old('description', $role->description)"
+                                    :hasError="$errors->get('description')" :label="__('role.description')" />
                             <x-input.error :message="$errors->first('description')" />
                         </div>
                     </div>
@@ -88,8 +84,5 @@
                     <x-secondary-button>{{ __('label.cancel') }}</x-secondary-button>
                 </div>
             </form>
-
-        </div>
-
-    </div>
+        </x-layouts.content>
 </x-layouts.app>
