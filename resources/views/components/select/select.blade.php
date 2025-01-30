@@ -1,13 +1,14 @@
-@props(['id', 'name', 'label' => 'Default Label', 'hasError' => false])
+@props(['id', 'name', 'label' => 'Select an option', 'hasError' => false])
+
 
 <!-- Label -->
 <label for="{{ $id }}"
-    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white {{ $hasError ? 'text-red-700' : '' }}">
+    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white {{ $hasError ? 'text-red-700' : '' }} ">
     {{ $label }}
 </label>
 
-<!-- Input -->
-<input
+<!-- Select Element -->
+<select
     {{ $attributes->merge([
         'id' => $id,
         'name' => $name,
@@ -16,4 +17,6 @@
             ($hasError
                 ? 'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500'
                 : ''),
-    ]) }} />
+    ]) }}>
+    {{ $slot }}
+</select>
