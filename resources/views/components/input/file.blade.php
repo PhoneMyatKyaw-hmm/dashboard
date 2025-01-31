@@ -1,5 +1,4 @@
-@props(['label' => 'Select an option', 'hasError' => false])
-
+@props(['label' => 'Upload File', 'hasError' => false])
 
 <!-- Label -->
 <label for="{{ $attributes->get('id') }}"
@@ -10,14 +9,12 @@
     @endif
 </label>
 
-<!-- Select Element -->
-<select
+<!-- Input -->
+<input type="file"
     {{ $attributes->merge([
         'class' =>
-            'text-sm rounded-lg block w-full p-2.5 bg-gray-50 border-gray-300 text-gray-900 focus:ring-primary focus:border-primary ' .
+            'my-2 filepond ' .
             ($hasError
                 ? 'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500'
                 : ''),
-    ]) }}>
-    {{ $slot }}
-</select>
+    ]) }} />
