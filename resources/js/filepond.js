@@ -11,7 +11,6 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 
 // Helpers
 import { deleteTempURL, getCsrfToken, storeTempURL } from './_helpers';
-import { DOC } from './app';
 
 // Register FilePond plugins
 FilePond.registerPlugin(
@@ -21,16 +20,16 @@ FilePond.registerPlugin(
 );
 
 // Declaring the file input element for FilePond.
-export let uploadImageElement = DOC.querySelector('input[name="image"]');
+export let uploadImageElement = document.querySelector('input[name="image"]');
 
 // Global function to initialize FilePond on a given element.
-export const initializeFilePond = (uploadImageElement, options = {}) => {
+export const initializeFilePond = (uploadImageElement, existingImage = null) => {
     if (!uploadImageElement) {
         console.error("File input element not found!");
         return; // Exit early if element is not found
     }
 
-    const defaultOptions = {
+    const options = {
         allowMultiple: false,               // Only one image allowed
         maxFileSize: '5MB',                 // Max file size is 5MB
         acceptedFileTypes: ['image/*'],     // Accept only image files
@@ -86,25 +85,18 @@ export const initializeFilePond = (uploadImageElement, options = {}) => {
         }
     }
 
-    // Merge the default options with any custom options passed
-    const finalOptions = { ...defaultOptions, ...options };
-
     // Create the FilePond instance
     const pondInstance = FilePond.create(uploadImageElement);
-    pondInstance.setOptions(finalOptions);
+    pondInstance.setOptions(options);
 
-    // Handle events for adding and removing files
-    pondInstance.on('addfile', (error, file) => {
-        if (error) {
-            console.error("Error adding file:", error);
-        }
-    });
+    if (existingImage) {
+        const ImageData = getExistingImage(existingImage.url, existingImage.fileName, existingImage.fileSize, existingImage.fileType);
 
-    pondInstance.on('removefile', (error, file) => {
-        if (error) {
-            console.error("Error removing file:", error);
-        }
-    });
+        // Set the existing image
+        pondInstance.setOptions({
+            files: ImageData
+        });
+    }
 
     return pondInstance;
 }
@@ -127,17 +119,10 @@ export const getExistingImage = (url, fileName, fileSize, fileType) => {
     }];
 }
 
-/**
- * WARNING: We will need to initialize when we use file upload on the edit page
- */
-DOC.addEventListener('DOMContentLoaded', () => {
-
-    // Finding if the page is create
-    // const isCreatePage = window.location.href.includes('/create');
-    const isCreatePage = true;
-
-    // Initialize the FilePond...
-    if (isCreatePage && uploadImageElement) {
-        initializeFilePond(uploadImageElement);
-    }
+// Auto-initialize FilePond
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="file"]').forEach(input => {
+        const existingImage = window.filepondData?.[input.name] || null;
+        initializeFilePond(input, existingImage);
+    });
 });
