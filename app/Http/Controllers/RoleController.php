@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Services\RoleService;
-use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use App\Services\RoleService;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -17,7 +16,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('access-roles');
+
+        $roles = Role::all();
+
+        return view('admin.roles.index')->with('roles', $roles);
     }
 
     /**
@@ -43,7 +46,6 @@ class RoleController extends Controller
 
         return redirect(route('roles.index'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -81,5 +83,7 @@ class RoleController extends Controller
         $roleService->delete($role);
 
         flash()->success(__('flash.role.deleteSuccess'));
+
+        return redirect(route('roles.index'));
     }
 }

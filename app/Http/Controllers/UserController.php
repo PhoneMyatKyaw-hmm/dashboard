@@ -82,5 +82,7 @@ class UserController extends Controller
         $userService->delete($user);
 
         flash()->success(__('flash.user.deleteSuccess'));
+
+        return redirect(route('users.index'));
     }
 }

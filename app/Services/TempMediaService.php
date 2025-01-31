@@ -12,15 +12,12 @@ class TempMediaService
 {
     /**
      * Stores a temporary file in the storage
-     *
-     * @param  Request $request
-     * @return JsonResponse
      */
     public function storeTempFile(Request $request): JsonResponse
     {
         $path = storage_path('tmp/uploads');
 
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             mkdir($path, 0755, true);
         }
 
@@ -31,7 +28,7 @@ class TempMediaService
         }
 
         if ($file) {
-            $name = uniqid() . '_' . trim($file->getClientOriginalName());
+            $name = uniqid().'_'.trim($file->getClientOriginalName());
 
             $file->move($path, $name);
 
@@ -51,16 +48,18 @@ class TempMediaService
             return response()->json(['error' => 'Filename is required'], 400);
         }
 
-        $path = storage_path('tmp/uploads/' . $filename);
+        $path = storage_path('tmp/uploads/'.$filename);
 
-        Log::info("Attempting to delete file at path: " . $path);
+        Log::info('Attempting to delete file at path: '.$path);
 
         if (File::exists($path)) {
             try {
                 File::delete($path);
+
                 return response()->json(['status' => 'File deleted successfully']);
             } catch (Exception $e) {
-                Log::error("Error deleting file: " . $e->getMessage());
+                Log::error('Error deleting file: '.$e->getMessage());
+
                 return response()->json(['error' => 'Failed to delete file'], 500);
             }
         }
